@@ -62,6 +62,16 @@ Client(Browser)
 Akhirnya, Django mengirimkan webpage (HTML yang sudah di-render) kembali ke browser client sebagai respon.
 
 
+Penjelasan untuk kaitan antara urls.py, views.py, models.py, dan berkas html:
+
+urls.py berfungsi sebagai peta jalur (routing). Saat client mengirim request lewat browser, Django akan mencocokkan alamat URL dengan daftar pola URL yang ada di urls.py. Dari sini, request diteruskan ke fungsi yang sesuai di views.py.
+
+views.py berisi logika aplikasi. Di sini, request diproses: bisa saja views mengambil atau mengolah data dari models.py, lalu memilih template HTML yang sesuai untuk ditampilkan ke pengguna.
+
+models.py bertugas sebagai penghubung dengan database. Jika views membutuhkan data, views akan meminta ke models. Models kemudian melakukan query ke database dan mengembalikan hasilnya ke views.
+
+Berkas HTML (Template) digunakan untuk menampilkan hasil ke pengguna. Views akan mengisi template dengan data yang sudah diambil dari models. Template ini kemudian di-render menjadi halaman web yang utuh, lalu dikirim kembali sebagai response ke browser client.
+
 Nomor 3
 
 File settings.py adalah pusat pengaturan untuk proyek Django. Jadi, semua konfigurasi penting dalam proyek yang kita buat akan disimpan di sini, seperti pengaturan keamanan app, pengaturan database, pengaturan aplikasi, pengaturan static dan media files, dll.
