@@ -1,10 +1,50 @@
-<h1>{{ app_name }}</h1>
+<h1>Aaron Kickstore</h1>
 
-<h5>NPM: </h5>
+<h5>NPM:</h5>
 <p>{{ npm }}</p>
 
-<h5>Name: </h5>
+<h5>Name:</h5>
 <p>{{ name }}</p>
 
-<h5>Class: </h5>
+<h5>Class:</h5>
 <p>{{ class }}</p>
+
+<a href="{% url 'main:create_product' %}">
+  <button>+ Add Product</button>
+</a>
+
+<hr>
+
+{% if not product_list %}
+<p>Belum ada produk di toko.</p>
+{% else %}
+
+  {% for product in product_list %}
+  <div>
+    <h2>
+      <a href="{% url 'main:show_product' product.id %}">{{ product.name }}</a>
+    </h2>
+    <p>Rp {{ product.price }}</p>
+
+    {% if product.thumbnail %}
+    <img src="{{ product.thumbnail }}" alt="Thumbnail" width="150" height="100">
+    <br />
+    {% endif %}
+
+    <p>{{ product.description|truncatewords:20 }}...</p>
+
+    <a href="{% url 'main:show_product' product.id %}">
+      <button>Detail</button>
+    </a>
+
+    <form method="POST" action="{% url 'main:delete_product' product.id %}" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" onclick="return confirm('Yakin mau menghapus produk ini?');">
+        Hapus Product
+      </button>
+    </form>
+
+    <hr>
+  </div>
+  {% endfor %}
+{% endif %}

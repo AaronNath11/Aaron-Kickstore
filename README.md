@@ -6,6 +6,50 @@ Kelas : PBP B
 
 Tautan PWS: https://aaron-nathanael-aaronkickstore.pbp.cs.ui.ac.id/
 
+
+Tugas 2
+
+Nomor 1
+
+Kita butuh data delivery dalam sebuah platform agar data bisa dikirim dari satu tempat ke tempat lain dengan benar, cepat, dan aman. Kalau tidak ada data delivery, platform tidak akan bisa jalan karena tidak ada cara untuk mengirim atau menerima data antara pengguna, server, atau sistem. Dengan adanya data delivery, informasi bisa sampe ke pengguna dengan tepat, aksesnya cepat, dan data juga tetap aman. Selain itu, data delivery juga penting kalau platform harus terhubung dengan layanan lain, misalnya payment gateway atau API. Misalnya user minta data produk, server harus bisa mengirim datanya dengan format tertentu(misal XML/JSON/HTML). Tanpa adanya mekanisme ini, user tidak akan bisa melihat data yang mereka butuhkan di platform.
+
+Nomor 2
+
+Menurut saya sendiri, JSON lebih baik dibandingkan XML. Alasannya adalah karena JSON punya ukuran file yang lebih kecil sehingga proses transfer data bisa lebih cepat daripada XML. Selain itu, JSON juga lebih ringkas dan gampang dibaca karena strukturnya sederhana dan tidak dipenuhi tag-tag kosong seperti XML. File JSON juga terlihat lebih bersih dan terorganisir, sedangkan XML cenderung lebih rumit dan terkesan ketinggalan zaman karena struktur tag-nya bikin file jadi lebih besar dan susah dibaca. Jadi, menurut saya hal-hal tersebutlah yang membuat JSON lebih populer dan banyak dipake dibandingkan XML.
+
+Nomor 3
+
+is_valid() dipakai untuk ngecek apakah data yang diinput user sesuai aturan form (misalnya field wajib diisi, format email benar, dll). Kita butuh method ini supaya data yang masuk ke database tetep bersih dan valid, jadi tidak ada data aneh-aneh atau error saat diproses.
+
+Nomor 4
+
+csrf_token berfungsi untuk melindungi form dari serangan CSRF(Cross Site Request Forgery). Kalau kita gak pake token ini, penyerang bisa bikin form palsu di website lain yang diem-diem mengirim request ke server kita atas nama user yang sedang login. Akibatnya, data user bisa dimanipulasi tanpa sepengetahuan mereka.
+
+Nomor 5
+
+Checklist 1: Saya menambahkan empat fungsi baru di views.py, yaitu show_xml, show_json, show_xml_by_id, dan show_json_by_id. Keempat fungsi ini menggunakan HttpResponse dan serializers untuk menampilkan data dalam format XML atau JSON.
+
+Checklist 2: Setelah itu, saya mengedit urls.py dengan mengimport fungsi tadi dan menambahkan path baru, supaya masing-masing fungsi bisa diakses lewat URL tadi.
+
+Checklist 3: Saya membuat fungsi create_product dan show_product di views.py, lalu menambahkan route nya di urls.py. Lalu di main.html, saya menambahkan button “Add” dan juga looping supaya semua produk bisa ditampilkan. Saya juga membuat file create_product.html untuk menampilkan form tambah produk.
+
+Checklist 4: Saya membuat forms.py yang berisi class ProductForm untuk menerima input data produk dari user. Lalu saya import ProductForm ke dalam views.py. Setelah itu, saya menambahkan product_list = Product.objects.all() ke dalam function show_main dan memasukkannya ke context supaya semua produk dari database bisa otomatis ditampilkan di halaman main.html.
+
+Checklist 5: Saya membuat file product_detail.html untuk menampilkan detail setiap produk, lalu menambahkan routing nya di urls.py.
+
+
+Nomor 6
+
+Sudah mantap kak, semuanya sudah jelas. Thank you so much!!!
+
+Nomor 7
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+
+Tugas 1
+
 Nomor 1
 
 Checklist 1: Pertama saya membuat direktori bernama "Aaron Kickstore" yang saya gunakan untuk menyimpan proyek Git-nya. Kemudian saya menginisiasi repositori baru dengan perintah git init. Selanjutnya, saya juga membuat repository baru di Github bernama "Aaron-Kickstore". Setelah melakukan inisiasi repositori lokal, langkah selanjutnya adalah menghubungkannya dengan repositori di GitHub. Setelah menghubungkan antara repositori lokal dengan repositori github, saya melakukan clone repositori ke komputer lokal. Selanjutnya, saya mengaktifkan Virtual Environment dengan melakukan "python -m venv env" kemudian mengaktifkannya. Setelah itu, saya membuat berkas requirements.txt dan tambahkan beberapa dependencies. Langkah terakhir, saya membuat dan memodifikasi file ".env", ".env.prod", dan "settings.py", kemudian menjalankan migrasi database dengan cara "python manage.py migrate" dan menjalankan server Django dengan perintah "python manage.py runserver". Proyek Django baru berhasil dibuat.
