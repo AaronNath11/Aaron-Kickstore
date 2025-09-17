@@ -7,7 +7,7 @@ Kelas : PBP B
 Tautan PWS: https://aaron-nathanael-aaronkickstore.pbp.cs.ui.ac.id/
 
 
-Tugas 2
+Tugas 3
 
 Nomor 1
 
@@ -35,7 +35,7 @@ Checklist 3: Saya membuat fungsi create_product dan show_product di views.py, la
 
 Checklist 4: Saya membuat forms.py yang berisi class ProductForm untuk menerima input data produk dari user. Lalu saya import ProductForm ke dalam views.py. Setelah itu, saya menambahkan product_list = Product.objects.all() ke dalam function show_main dan memasukkannya ke context supaya semua produk dari database bisa otomatis ditampilkan di halaman main.html.
 
-Checklist 5: Saya membuat file product_detail.html untuk menampilkan detail setiap produk, lalu menambahkan routing nya di urls.py.
+Checklist 5: Saya membuat file product_detail.html yang terhubung dengan show_product di views.py untuk menampilkan detail setiap produk, lalu menambahkan routing nya di urls.py.
 
 
 Nomor 6
@@ -48,7 +48,7 @@ Nomor 7
 ![alt text](image-2.png)
 ![alt text](image-3.png)
 
-Tugas 1
+Tugas 2
 
 Nomor 1
 
