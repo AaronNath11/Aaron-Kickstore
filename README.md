@@ -7,6 +7,40 @@ Kelas : PBP B
 Tautan PWS: https://aaron-nathanael-aaronkickstore.pbp.cs.ui.ac.id/
 
 
+Tugas 4
+
+
+Nomor 1
+
+AuthenticationForm adalah form bawaan Django yang digunakan untuk proses login user. Form ini berfungsi untuk memeriksa apakah username dan password yang dimasukkan pengguna sudah sesuai dengan data user yang sudah terdaftar di database. Kelebihan utama AuthenticationForm adalah karena sudah disediakan langsung oleh Django sehingga kita tidak perlu membuat form login dari awal lagi. Selain itu, keamanannya juga sudah terjamin karena Django otomatis menangani validasi password, pengecekan akun aktif, serta sudah terintegrasi dengan sistem autentikasi bawaan. Namun, AuthenticationForm memiliki beberapa kekurangan, seperti kurang fleksibel ketika aplikasi membutuhkan metode login khusus, misalnya login dengan email, nomor telepon, atau kode OTP (ini karena hanya mendukung metode login dengan username dan password). Tampilan default nya juga bisa dibilang cukup sederhana sehingga biasanya perlu penyesuaian biar sesuai dengan desain aplikasi. 
+
+Nomor 2
+
+Autentikasi itu proses untuk memastikan identitas pengguna. Contohnya misal kita login dengan username dan password yg kita punya, sistem akan ngecek apakah data itu benar dan cocok dengan akun yang ada. Sementara Otorisasi itu proses untuk menentukan apa saja yang boleh dilakukan pengguna setelah dia berhasil login. Contohnya misal seorang admin bisa menghapus data, tapi user biasa hanya bisa melihat datanya aja dan gabisa menghapusnya. 
+Dalam Django, autentikasi dilakukan dengan bantuan model User, fungsi login()/logout(), serta form bawaan seperti AuthenticationForm. Prosesnya adalah Django akan mencocokkan username atau email dan password yang dimasukkan dengan data user di database. Kalau cocok, Django akan membuat session sehingga user dianggap sudah login. Sementara itu, otorisasi di Django diatur lewat sistem permissions dan groups. Setiap user bisa diberi izin tertentu, misalnya can_add_product atau can_delete_user, atau dimasukkan ke dalam grup seperti "Admin" yang memiliki hak akses khusus. Dengan cara ini, Django bisa mengatur siapa aja yang boleh melakukan tindakan tertentu atau mengakses halaman tertentu di dalam aplikasi.
+
+Nomor 3
+
+Session dan cookies sama-sama digunakan untuk menyimpan state atau informasi pengguna di aplikasi web, tapi cara kerjanya berbeda dan masing-masing punya kelebihan dan kekurangan. Cookies disimpan langsung di browser pengguna sehingga server tidak perlu menyimpan banyak data. Kelebihannya adalah cookies ringan untuk server dan bisa dipakai lintas sesi atau perangkat. Namun, cookies lebih rentan terhadap pencurian data dan ukuran datanya terbatas. Sementara itu, session menyimpan data di server, sedangkan browser nya hanya menyimpan ID session lewat cookie. Kelebihannya adalah data lebih aman karena detailnya ada di server, dan bisa menyimpan informasi yang lebih besar atau sensitif. Kekurangannya adalah session ini membebani server karena harus menyimpan data setiap user dan kalo gak dikelola dengan baik bisa membuat server cepet penuh. Jadi pada intinya, cookies cocok untuk menyimpan data kecil yang tidak terlalu penting, sedangkan session lebih cocok untuk data sensitif.
+
+Nomor 4
+
+Penggunaan cookies sebenernya tidak sepenuhnya aman secara default karena ada beberapa resiko yang harus diwaspadai, seperti pencurian cookies lewat serangan Cross-Site Scripting (XSS) atau penyalahgunaan cookies lewat Cross-Site Request Forgery (CSRF). Jika cookie berisi informasi penting, maka kebocoran bisa sangat berbahaya. Tapi untuk mengurangi resiko ini, Django sudah menyediakan pengaturan keamanan bawaan, misalnya HttpOnly agar cookie tidak bisa diakses lewat JavaScript, Secure agar cookie hanya terkirim lewat HTTPS, dan CSRF token untuk melindungi dari serangan CSRF. Selain itu, Django juga punya SESSION_COOKIE_AGE SESSION_COOKIE_SECURE, dan SESSION_COOKIE_HTTPONLY untuk mengatur seberapa lama dan seaman apa cookie disimpan.
+
+Nomor 5
+
+Checklist 1: Saya mengimplementasikan fitur registrasi, login, dan logout agar pengguna bisa mengakses aplikasi sebelumnya sesuai dengan status login/logout mereka. Untuk registrasi, saya menggunakan UserCreationForm bawaan Django dengan bantuan messages untuk menampilkan notifikasi. Saya juga membuat fungsi register di views.py yang akan memproses data dari form dan otomatis membuat akun baru ketika data disubmit, lalu menampilkan halaman register.html. Untuk login, saya membuat fungsi login_user di views.py yang berfungsi mengautentikasi pengguna dan juga membuat halaman login.html untuk tampilannya. Untuk logout, saya menambahkan fungsi logout_user agar pengguna bisa logout. Kemudian saya hubungkan semua fungsi tadi lewat urls.py dengan menambahkan path nya masing-masing. Selain itu, saya juga membuat fungsi show_main dan show_product yang hanya bisa diakses oleh pengguna yang sudah login dan juga menambahkan @login_required pada kedua fungsi tersebut.
+
+
+Checklist 2: Saya membuat 2 akun pengguna dan menambahkan 3 dummy data pada masing-masing akun. Ini saya lakukan di local, bukan di PWS.
+
+
+Checklist 3: Saya import User dan menambahkan atribut baru bernama user di dalam class Product di models.py. Kemudian, saya memodifikasi fungsi show_main dan create_product di dalam views.py.
+
+
+Checklist 4: Pada fungsi show_main, saya menambahkan request.user ke dalam context agar informasi pengguna yang sedang login bisa dipindahkan ke template melalui fungsi render. Selain itu, saya juga menambahkan request.COOKIES.get('last_login', 'Never') untuk mengirimkan data last login dari cookies. Saya juga mengatur Cookies last_login saat pengguna melakukan login melalui fungsi login_user dan akan dihapus ketika pengguna logout melalui fungsi logout_user. Saya juga mengedit main.html dengan menambahkan {{ last_login }} agar informasi waktu last login bisa ditampilkan kepada pengguna.
+
+
 Tugas 3
 
 Nomor 1
