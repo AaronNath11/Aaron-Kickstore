@@ -90,7 +90,7 @@ Margin, border, dan padding adalah bagian dari CSS box model yang berfungsi meng
 
 Cara Implementasi di CSS
 
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -109,7 +109,7 @@ Cara Implementasi di CSS
     Test doang
   </div>
 </body>
-</html> -->
+</html>
 
 
 Nomor 4
