@@ -7,6 +7,115 @@ Kelas : PBP B
 Tautan PWS: https://aaron-nathanael-aaronkickstore.pbp.cs.ui.ac.id/
 
 
+Tugas 5
+
+Nomor 1
+
+Urutan dari prioritas tertinggi hingga terendah:
+
+1.!important
+Alasan: Dipakai untuk menandai aturan yang harus meng-override semua aturan lain
+Bobot: Tidak dihitung dalam specificity, tapi langsung diprioritaskan paling tinggi
+
+2.Inline styles
+Alasan: Ditulis langsung di elemen HTML, dianggap paling spesifik
+Contoh: <h1 style="color:pink;">
+Bobot: 1000
+
+3.ID selector
+Alasan: karena ID unik di dalam satu halaman, jadi tingkat spesifisitasnya tinggi
+Contoh: #header { color: blue; }
+Bobot: 0100
+
+4.Class, attribute, pseudo-class
+Alasan: Class bisa dipake berulang kali, jadi lebih lemah dari ID, tapi lebih kuat dari elemen biasa
+Contoh: .title {}, [type="text"] {}, :hover {}
+Bobot: 0010
+
+5.Element dan pseudo-element
+Alasan: Selector paling umum, hanya menargetkan tag HTML atau pseudo-element
+Contoh: p {}, h1 {}, ::before {}
+Bobot: 0001
+
+6.Universal selector & :where()
+Alasan: Digunakan untuk menargetkan semua elemen atau reset, tanpa menambah kekuatan spesifisitas
+Contoh: * { margin:0; }, :where(.box) {}
+Bobot: 0000
+
+
+Nomor 2
+
+Mengapa Responsive Design Penting dalam Web Development:
+
+1.Perbedaan Ukuran Layar
+Pengguna mengakses web lewat berbagai perangkat: laptop, tablet, smartphone. Responsive design memastikan tampilan menyesuaikan ukuran layar.
+
+2.User Experience/UX
+Web yang tidak responsive bikin teks terlalu kecil, tombol susah diklik, atau layout berantakan. Responsive design membuat navigasi tetap nyaman di semua perangkat.
+
+3.SEO (Search Engine Optimization)
+Google memberi peringkat lebih tinggi pada website yang mobile-friendly. Jadi, responsive design langsung berdampak ke visibilitas di search engine.
+
+4.Efisiensi Maintenance
+Daripada bikin versi desktop dan mobile terpisah, responsive design cukup dengan satu basis kode, lebih efisien dan mudah dipelihara.
+
+Aplikasi yang sudah menerapkan responsive design:
+Tokopedia / Shopee: Diakses lewat laptop, tampilannya berupa grid produk besar. Kalo di HP, tampilannya berubah jadi list dengan tombol besar agar mudah ditekan jari.
+Alasan: Membuat pengguna nyaman belanja dari device apapun sehingga dapat meningkatkan engagement dan penjualan.
+
+Aplikasi yang belum responsive: 
+Website lama instansi pemerintah atau portal berita jadul, biasanya kalo dibuka di HP harus zoom in–out, tombol terlalu kecil, dan layout pecah.
+Alasan: Karena belum didesain untuk mobile-first, jadinya UX masih jelek sehingga pengguna lebih cepet bosen.
+
+
+Nomor 3
+
+Margin, border, dan padding adalah bagian dari CSS box model yang berfungsi mengatur tata letak elemen di halaman web. Margin adalah ruang kosong di bagian luar elemen yang berfungsi memberi jarak antara satu elemen dengan elemen lainnya. Ruang ini tidak terlihat karena sifatnya transparan, tapi sangat penting untuk menjaga tata letak agar elemen tidak saling menempel. Sementara itu, border adalah garis yang mengelilingi elemen dan berada di antara margin dan padding. Border dapat diatur ketebalannya, warnanya, maupun jenis garisnya, sehingga selain sebagai pembatas, border juga dapat digunakan sebagai elemen dekoratif. Dan yang terakhir, padding adalah ruang kosong di dalam elemen, yaitu jarak antara konten (seperti teks atau gambar) dengan border. Padding memastikan konten tidak terlalu menempel pada border, sehingga tampilannya lebih rapi dan nyaman dibaca.
+
+
+Cara Implementasi di CSS
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Implementasi Margin, Border, dan Padding</title>
+  <style>
+    .box {
+      margin: 30px;
+      border: 5px solid blue;
+      padding: 20px;
+      background-color: lightyellow;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    Test doang
+  </div>
+</body>
+</html>
+
+
+Nomor 4
+
+Flexbox (Flexible Box Layout) adalah sebuah metode tata letak di CSS yang dirancang untuk mengatur elemen dalam satu dimensi, baik secara horizontal (baris) maupun vertikal (kolom). Flexbox sangat berguna ketika kita ingin membuat elemen di dalam sebuah container agar mudah diatur jarak, ukuran, dan posisinya tanpa harus menggunakan float atau positioning manual. Kelebihan utama flexbox adalah fleksibilitasnya dalam menyesuaikan elemen sesuai ukuran layar atau ruang yang tersedia. Sementara itu, CSS Grid Layout adalah sistem tata letak dua dimensi yang lebih kuat karena memungkinkan kita mengatur elemen baik dalam baris maupun kolom secara bersamaan. Grid nya bekerja seperti tabel yang modern, di mana kita bisa mendefinisikan baris dan kolom, lalu menempatkan elemen ke posisi tertentu dengan mudah.
+
+
+Nomor 5
+
+Checklist 1: Untuk implementasi fitur edit product, saya menambahkan fungsi edit_product di views.py, membuat file HTML bernama edit_product.html, melakukan routing URL, dan melakukan sedikit modifikasi pada tombol di main.html. Proses yang mirip juga saya lakukan untuk implementasi fitur delete product. Dengan langkah ini, aplikasi menjadi lebih interaktif karena user tidak hanya bisa menambah produk, tetapi juga mengedit maupun menghapus produk yang sudah ada.
+
+Checklist 2: Saya menggunakan tailwind untuk CSS framework pada aplikasi yang saya buat. Saya menyambungkan django dan tailwind dengan menambahkan script cdn tailwind di bagian head base.html.
+
+Checklist 3: Untuk halaman login, register, tambah product, edit product, dan detail product, saya melakukan kustomisasi tampilan supaya lebih menarik. Perubahan yang saya lakukan adalah mengganti palet warna default yang awalnya hijau-putih menjadi ungu neon dengan kombinasi hitam/abu gelap sebagai latarnya. Saya juga menambahkan efek glow (drop shadow neon) pada teks maupun tombol agar lebih konsisten dengan tema gelap yang saya mau.
+
+Checklist 4: Untuk halaman daftar product, saya mengimplementasikan tampilan dengan gaya card tetapi memodifikasi dari tutorial. Jika belum ada produk, halaman akan menampilkan gambar ilustrasi beserta pesan bahwa belum ada product yang terdaftar. Jika sudah ada produk, maka tiap produk ditampilkan dalam bentuk card dengan border ungu neon dan ada shadownya, sehingga tidak terlalu menyatu dengan background. Pada tiap card, saya menambahkan dua tombol untuk mengedit dan menghapus product, dengan warna ungu neon juga.
+
+Checklist 5: Untuk navigation bar, saya membuatnya responsive sehingga tampilannya menyesuaikan antara versi mobile dan desktop. Navbar memiliki logo "Aaron Kickstore" dengan efek ungu neon dan juga udah saya integrasikan ke halaman utama (main.html). Pada versi desktop, menu navigasi tampil horizontal, sedangkan pada versi mobile menggunakan tombol hamburger menu yang bisa diklik untuk menampilkan daftar link. Saya juga menambahkan efek transisi hover berwarna neon agar lebih interaktif.
+
+
+
 Tugas 4
 
 
