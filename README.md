@@ -7,6 +7,34 @@ Kelas : PBP B
 Tautan PWS: https://aaron-nathanael-aaronkickstore.pbp.cs.ui.ac.id/
 
 
+Tugas 6
+
+Nomor 1
+
+Perbedaan utama antara synchronous request dan asynchronous request adalah terletak pada cara mereka menunggu dan memproses respon. Pada synchronous request, ketika sebuah permintaan dikirim, program akan berhenti dan menunggu sampai respon diterima sebelum melanjutkan ke langkah berikutnya. Jadi, eksekusi program terhenti sementara saat menunggu data. Sedangkan pada asynchronous request, permintaan dikirim tanpa menghentikan eksekusi program, sehingga program bisa tetap berjalan melakukan tugas lain sementara menunggu respon. Setelah respon datang, baru program menanganinya. Jadi, synchronous membuat program terkunci sampe datanya datang, sedangkan asynchronous membuat program tetap aktif dan lebih efisien terutama saat menangani banyak permintaan sekaligus.
+
+
+Nomor 2
+
+AJAX bekerja dengan cara mengirim permintaan (request) ke server secara asynchronous, jadi halaman web tidak perlu direload penuh untuk mendapatkan data baru. Saat pengguna melakukan aksi yang memicu AJAX, misalnya menekan tombol atau mengisi form, browser akan mengirim HTTP request ke salah satu view di Django. View tersebut akan memproses data, misalnya mengambil informasi dari database, lalu mengembalikan respon dalam format JSON atau HTML. Browser kemudian menerima respon ini dan menggunakan JavaScript untuk mengupdate bagian tertentu di halaman tanpa memuat ulang seluruh halaman. Jadi alur singkatnya: pengguna --> JavaScript mengirim AJAX --> Django view memproses --> respon dikembalikan --> JavaScript memperbarui halaman.
+
+
+Nomor 3
+
+Keuntungan menggunakan AJAX dibandingkan render biasa di Django adalah terletak pada pengalaman pengguna dan efisiensi pemrosesan. Dengan AJAX, halaman web bisa memperbarui data atau konten tertentu tanpa perlu memuat ulang seluruh halaman, sehingga interaksi jadi lebih cepat. Hal ini juga mengurangi beban server karena hanya data yang diperlukan yang dikirim dan diproses, bukan seluruh halaman HTML. Selain itu, AJAX memungkinkan aplikasi web menjadi lebih responsive dan interaktif, misalnya untuk menampilkan notifikasi atau update tabel yang akan terasa lebih lambat jika harus merender halaman penuh setiap kali ada perubahan.
+
+
+Nomor 4
+
+Pertama, selalu gunakan metode POST untuk mengirim data sensitif seperti username dan password (jangan pake GET). Kedua, pastikan untuk menggunakan CSRF token agar server bisa memverifikasi bahwa permintaan benar-benar berasal dari situs kita dan bukan dari pihak luar. Ketiga, jangan simpan password secara langsung, selalu lakukan hashing sebelum menyimpan di database. Keempat, validasi data yang dikirim dari sisi server untuk mencegah input berbahaya seperti SQL injection atau XSS.
+
+
+Nomor 5
+
+AJAX bisa meningkatkan pengalaman pengguna di website karena membuat interaksi menjadi lebih cepat dan lancar. Dengan AJAX, bagian tertentu dari halaman bisa diperbarui tanpa harus memuat ulang seluruh halaman, sehingga pengguna tidak perlu menunggu lama atau terganggu dengan reload yang sering. Misalnya ketika menambahkan produk ke keranjang atau mencari data semuanya bisa dilakukan secara langsung dan responsif. Hal ini membuat website terasa lebih interaktif, modern, dan nyaman digunakan, karena pengguna bisa melakukan banyak aksi tanpa hambatan atau gangguan yang biasanya terjadi saat halaman harus direfresh.
+
+
+
 Tugas 5
 
 Nomor 1

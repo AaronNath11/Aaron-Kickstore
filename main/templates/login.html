@@ -13,32 +13,10 @@
         <p class="text-gray-600">Welcome back to Aaron Kickstore</p>
       </div>
 
-      <!-- Form Errors Display -->
-      {% if form.non_field_errors %}
-        <div class="mb-6">
-          {% for error in form.non_field_errors %}
-            <div class="px-4 py-3 rounded-md text-sm border bg-red-50 border-red-200 text-red-700">
-              {{ error }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
+      <!-- Message Box -->
+      <div id="login-message" class="hidden mb-4"></div>
 
-      {% if form.errors %}
-        <div class="mb-6">
-          {% for field, errors in form.errors.items %}
-            {% if field != '__all__' %}
-              {% for error in errors %}
-                <div class="px-4 py-3 rounded-md text-sm border bg-red-50 border-red-200 text-red-700 mb-2">
-                  <strong>{{ field|title }}:</strong> {{ error }}
-                </div>
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      <form method="POST" action="" class="space-y-6">
+      <form id="loginForm" method="POST" class="space-y-6">
         {% csrf_token %}
         
         <div>
@@ -65,31 +43,11 @@
 
         <button 
           type="submit" 
+          id="loginButton"
           class="w-full bg-purple-600 text-white font-medium py-3 px-4 rounded-md hover:bg-purple-500 transition-colors shadow-lg shadow-purple-400/50">
           Sign In
         </button>
       </form>
-
-      <!-- Messages Display -->
-      {% if messages %}
-        <div class="mt-6">
-          {% for message in messages %}
-            <div 
-              class="
-                px-4 py-3 rounded-md text-sm border
-                {% if message.tags == 'success' %}
-                  bg-purple-50 border-purple-200 text-purple-700
-                {% elif message.tags == 'error' %}
-                  bg-red-50 border-red-200 text-red-700
-                {% else %}
-                  bg-gray-50 border-gray-200 text-gray-700
-                {% endif %}
-              ">
-              {{ message }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
 
       <div class="mt-6 text-center pt-6 border-t border-gray-200">
         <p class="text-gray-500 text-sm">
@@ -102,4 +60,86 @@
     </div>
   </div>
 </div>
+
+<script>
+  const loginForm = document.getElementById("loginForm");
+  const loginButton = document.getElementById("loginButton");
+  const messageBox = document.getElementById("login-message");
+
+  function showMessage(text, type) {
+    messageBox.classList.remove("hidden", "bg-red-50", "border-red-200", "text-red-700", "bg-green-50", "border-green-200", "text-green-700");
+    if (type === "error") {
+      messageBox.classList.add("bg-red-50", "border-red-200", "text-red-700");
+    } else {
+      messageBox.classList.add("bg-green-50", "border-green-200", "text-green-700");
+    }
+    messageBox.classList.add("px-4", "py-3", "rounded-md", "border", "text-sm");
+    messageBox.innerText = text;
+  }
+
+  function getCSRFToken() {
+    const name = "csrftoken=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookies = decodedCookie.split(';');
+    for (let c of cookies) {
+      c = c.trim();
+      if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+    }
+    return "";
+  }
+
+  loginForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Disable button untuk mencegah double submit
+    loginButton.disabled = true;
+    loginButton.textContent = "Signing in...";
+
+    const formData = new FormData(loginForm);
+
+    fetch("{% url 'main:login' %}", {
+      method: "POST",
+      headers: { "X-CSRFToken": getCSRFToken() },
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === "success") {
+        showMessage("Login successful! Redirecting...", "success");
+        
+        // Tampilkan toast notification
+        if (typeof showToast === 'function') {
+          showToast('Selamat Anda berhasil login😉', '', 'success');
+        }
+        
+        setTimeout(() => {
+          window.location.href = data.redirect_url;
+        }, 1000);
+      } else {
+        showMessage(data.message || "Invalid username or password", "error");
+        
+        // Tampilkan toast error
+        if (typeof showToast === 'function') {
+          showToast(data.message || "Invalid username or password", '', 'error');
+        }
+        
+        // Re-enable button
+        loginButton.disabled = false;
+        loginButton.textContent = "Sign In";
+      }
+    })
+    .catch(() => {
+      showMessage("An error occurred. Please try again.", "error");
+      
+      // Tampilkan toast error
+      if (typeof showToast === 'function') {
+        showToast("An error occurred. Please try again.", '', 'error');
+      }
+      
+      // Re-enable button
+      loginButton.disabled = false;
+      loginButton.textContent = "Sign In";
+    });
+  });
+</script>
 {% endblock content %}

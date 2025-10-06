@@ -6,7 +6,7 @@
   <!-- Thumbnail -->
   <div class="aspect-[16/9] relative overflow-hidden">
     {% if product.thumbnail %}
-      <img src="{{ product.thumbnail }}" alt="{{ product.title }}" 
+      <img src="{{ product.thumbnail }}" alt="{{ product.name }}" 
            class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
     {% else %}
       <div class="w-full h-full bg-purple-300"></div>

@@ -23,7 +23,7 @@
         <p class="text-gray-600">Update your football product and stories</p>
       </div>
       
-      <form method="POST" class="space-y-6">
+      <form id="editProductForm" method="POST" class="space-y-6">
         {% csrf_token %}
         {% for field in form %}
           <div>
@@ -43,7 +43,8 @@
         {% endfor %}
         
         <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
-          <a href="{% url 'main:show_main' %}" class="order-2 sm:order-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors text-center">
+          <a href="{% url 'main:show_main' %}" 
+             class="order-2 sm:order-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors text-center">
             Cancel
           </a>
           <button type="submit" 
@@ -52,7 +53,57 @@
           </button>
         </div>
       </form>
+
+      <div id="updateStatus" class="mt-4 text-center text-sm font-medium hidden"></div>
     </div>
   </div>
 </div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("editProductForm");
+    const statusDiv = document.getElementById("updateStatus");
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const csrfToken = formData.get("csrfmiddlewaretoken");
+
+      const urlParts = window.location.pathname.split("/");
+      const productId = urlParts[urlParts.length - 2];
+
+      try {
+        const response = await fetch(`/product/${productId}/edit`, {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": csrfToken,
+          },
+          body: formData,
+        });
+
+        if (response.ok) {
+          statusDiv.textContent = "✅ Product updated successfully!";
+          statusDiv.className = "mt-4 text-center text-sm font-medium text-green-600";
+          statusDiv.classList.remove("hidden");
+
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 1500);
+        } else {
+          const data = await response.json();
+          statusDiv.textContent = "❌ Failed to update product: " + (data.message || "Unknown error");
+          statusDiv.className = "mt-4 text-center text-sm font-medium text-red-600";
+          statusDiv.classList.remove("hidden");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        statusDiv.textContent = "⚠️ An error occurred while updating.";
+        statusDiv.className = "mt-4 text-center text-sm font-medium text-red-600";
+        statusDiv.classList.remove("hidden");
+      }
+    });
+  });
+</script>
 {% endblock %}

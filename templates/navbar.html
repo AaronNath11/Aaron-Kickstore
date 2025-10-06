@@ -30,7 +30,7 @@
               {{ npm|default:"Student" }} - {{ class|default:"Class" }}
             </div>
           </div>
-          <a href="{% url 'main:logout' %}" class="text-red-500 hover:text-red-400 font-medium transition-colors">
+          <a href="{% url 'main:logout' %}" id="logoutBtn" class="text-red-500 hover:text-red-400 font-medium transition-colors">
             Logout
           </a>
         {% else %}
@@ -77,7 +77,7 @@
             <div class="font-medium text-purple-200">{{ name|default:user.username }}</div>
             <div class="text-sm text-gray-400">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
           </div>
-          <a href="{% url 'main:logout' %}" class="block text-red-500 hover:text-red-400 font-medium py-3 transition-colors">
+          <a href="{% url 'main:logout' %}" id="logoutBtnMobile" class="block text-red-500 hover:text-red-400 font-medium py-3 transition-colors">
             Logout
           </a>
         {% else %}
@@ -95,10 +95,40 @@
   </div>
 
   <script>
+    // Mobile menu toggle
     const btn = document.querySelector("button.mobile-menu-button");
     const menu = document.querySelector(".mobile-menu");
     btn.addEventListener("click", () => {
       menu.classList.toggle("hidden");
     });
+
+    // Logout with toast notification
+    {% if user.is_authenticated %}
+    function handleLogout(e) {
+      e.preventDefault();
+      
+      // Tampilkan toast
+      if (typeof showToast === 'function') {
+        showToast('Anda berhasil Logout🤗!', '', 'success');
+      }
+      
+      // Redirect setelah delay
+      setTimeout(() => {
+        window.location.href = e.target.href;
+      }, 800);
+    }
+
+    // Desktop logout button
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', handleLogout);
+    }
+
+    // Mobile logout button
+    const logoutBtnMobile = document.getElementById('logoutBtnMobile');
+    if (logoutBtnMobile) {
+      logoutBtnMobile.addEventListener('click', handleLogout);
+    }
+    {% endif %}
   </script>
 </nav>
