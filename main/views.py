@@ -113,7 +113,6 @@ def show_product(request, id):
     return render(request, "product_detail.html", context)
 
 
-
 def delete_product(request, id):
     if request.method == "POST":
         try:
@@ -123,8 +122,6 @@ def delete_product(request, id):
         except Exception as e:
             return JsonResponse({"success": False, "error": str(e)})
     return JsonResponse({"success": False, "error": "Invalid request"})
-
-
 
 
 def show_xml(request):
@@ -203,8 +200,6 @@ def register(request):
     form = UserCreationForm()
     context = {'form': form}
     return render(request, 'register.html', context)
-
-
 
 
 @csrf_exempt

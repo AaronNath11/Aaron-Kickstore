@@ -18,7 +18,7 @@
       <p class="text-purple-200">Browse and manage your products easily</p>
     </div>
 
-    <button onclick="showModal()" 
+    <button onclick="showModal()"
       class="inline-flex items-center px-4 py-2 bg-white text-purple-600 font-semibold outline outline-2 outline-purple-600 rounded-md hover:bg-purple-600 hover:text-white hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.9)] transition-colors mb-6">
       Create product by AJAX
     </button>
@@ -49,6 +49,7 @@
       {% endif %}
     </div>
 
+    <!-- Loading State -->
     <div id="loading" class="bg-white rounded-lg border border-gray-200 p-12 text-center hidden">
       <svg class="animate-spin h-8 w-8 text-purple-600 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -57,12 +58,15 @@
       <p class="text-gray-600 mt-3">Loading product...</p>
     </div>
 
+    <!-- Error State -->
     <div id="error" class="hidden"></div>
+
     <div id="grid" class="hidden"></div>
 
+    <!-- Empty State -->
     <div id="empty" class="bg-white rounded-lg border border-gray-200 p-12 text-center hidden">
       <div class="w-32 h-32 mx-auto mb-4">
-        <img src="{% static 'image/Jordan1.png' %}" alt="No product available" class="w-full h-full object-contain">
+        <img src="{% static 'image/no-item.png' %}" alt="No product available" class="w-full h-full object-contain">
       </div>
       <h3 class="text-lg font-medium text-gray-900 mb-2">No product found</h3>
       <p class="text-gray-500 mb-6">Be the first to share football product with the community.</p>
