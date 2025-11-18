@@ -287,3 +287,11 @@ def create_product_flutter(request):
 
     else:
         return JsonResponse({"status": "error"}, status=401)
+
+@login_required
+def get_user(request):
+    return JsonResponse({
+        "id": request.user.id,
+        "username": request.user.username
+    })
+
